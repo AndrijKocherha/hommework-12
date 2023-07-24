@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet" href="css/nullstyle.css" />
+		<link rel="stylesheet" href="css/style.css" />
+		<title>task4</title>
+	</head>
+	<body>
+		<main class="page">
+			<div class="page__container">
+				<div class="task">
+					<div class="task__condition text">
+						Задача 5. Дано масив імен. Застосовуючи відповідне сортування та бінарний пошук визначити, чи є у масиві ім’я «Olga» і під яким індексом.
+					</div>
+				</div>
+				<script>
+					function searchOlgaIndex(arr, seachEl) {
+						arr.sort()
+						let start = 0
+						let end = arr.length - 1
+						let middle
+						while (start <= end) {
+							middle = Math.floor((end + start) / 2)
+							if (seachEl === arr[middle]) return middle
+							if (seachEl > arr[middle]) start = middle + 1
+							if (seachEl < arr[middle]) end = middle - 1
+						}
+						return false
+					}
+					let names = ["Felix", "Taras", "Ivan", "Galina", "Roman", "Sviatoslav", "Sonya", "Andri", "Voloda", "Illa", "Vasil", "Olga", "Pavlo"]
+					let seachEl = "Olga"
+					let indxOfOlga = searchOlgaIndex(names, seachEl)
+					document.write(`імя Olga знаходиться під індексом ${indxOfOlga}`)
+				</script>
+			</div>
+		</main>
+	</body>
+</html>

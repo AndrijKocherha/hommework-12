@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet" href="css/nullstyle.css" />
+		<link rel="stylesheet" href="css/style.css" />
+		<title>task2</title>
+	</head>
+	<body>
+		<main class="page">
+			<div class="page__container">
+				<div class="task">
+					<div class="task__condition text"></div>
+				</div>
+				<script>
+					function getArr(elCount) {
+						let arr = []
+						let minNum = 1
+						let maxNum = 50
+						for (let i = 0; i < elCount; i++) {
+							const randomNum = minNum + Math.floor(Math.random() * maxNum)
+							arr.push(randomNum)
+						}
+						return arr
+					}
+					let elCpunt = 30
+					let mainArray = getArr(elCpunt)
+					console.log(mainArray)
+					//##########
+					function getStepsBySortInclusion(arr) {
+						let newArr = []
+						let arrChange
+						for (let i = 1; i < arr.length; i++) {
+							let curEl = arr[i]
+							let prevEl = i - 1
+							while (prevEl >= 0 && arr[prevEl] > curEl) {
+								arr[prevEl + 1] = arr[prevEl]
+								prevEl -= 1
+							}
+							arr[prevEl + 1] = curEl
+							arrChange = [...arr]
+							newArr.push(arrChange)
+						}
+						return newArr
+					}
+					let stepsBySortInclusion = getStepsBySortInclusion(mainArray)
+					document.write(`[ ${stepsBySortInclusion.join(" ]<br/> [ ")} ]`)
+				</script>
+			</div>
+		</main>
+	</body>
+</html>

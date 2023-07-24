@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet" href="css/nullstyle.css" />
+		<link rel="stylesheet" href="css/style.css" />
+		<title>task3</title>
+	</head>
+	<body>
+		<main class="page">
+			<div class="page__container">
+				<div class="task">
+					<div class="task__condition text"></div>
+				</div>
+				<script>
+					function getArr(elCount) {
+						let arr = []
+						let minNum = 1
+						let maxNum = 50
+						for (let i = 0; i < elCount; i++) {
+							const randomNum = minNum + Math.floor(Math.random() * maxNum)
+							arr.push(randomNum)
+						}
+						return arr
+					}
+					let elCpunt = 30
+					let mainArray = getArr(elCpunt)
+					console.log(mainArray)
+					//// Галя яка заміняє 2 числа
+					function swap(arr, first, next) {
+						let temp = arr[first]
+						arr[first] = arr[next]
+						arr[next] = temp
+					}
+					//##########
+					function getStepsBySortChoosing(arr) {
+						let newArr = [[...arr]]
+						let arrChange
+						let prevLast = arr.length - 2
+						for (let i = 0; i <= prevLast; i++) {
+							let minNum = i
+							for (let j = i + 1; j < arr.length; j++) {
+								if (arr[minNum] > arr[j]) {
+									minNum = j
+								}
+							}
+							// нотаток для себе : ця умова для того щоб якщо мінімальний елемент уже і так стоїть на 0 -овій  позиції то не потрібно було міняти мінальне arr[i] arr[minNum]
+							if (i !== minNum) {
+								swap(arr, i, minNum)
+							}
+							arrChange = [...arr]
+							newArr.push(arrChange)
+						}
+						return newArr
+					}
+					let stepsBySortChoosing = getStepsBySortChoosing(mainArray)
+					document.write(`[ ${stepsBySortChoosing.join(" ]<br/> [ ")} ]`)
+				</script>
+			</div>
+		</main>
+	</body>
+</html>

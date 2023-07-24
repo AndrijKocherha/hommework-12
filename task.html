@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet" href="css/nullstyle.css" />
+		<link rel="stylesheet" href="css/style.css" />
+		<title>task0</title>
+	</head>
+	<body>
+		<main class="page">
+			<div class="page__container">
+				<div class="task">
+					<div class="task__condition text">task4 (бульбашкою)</div>
+				</div>
+				<script>
+					// створення масиву
+					function getArr(elCount) {
+						let arr = []
+						let minNum = 1
+						let maxNum = 50
+						for (let i = 0; i < elCount; i++) {
+							const randomNum = minNum + Math.floor(Math.random() * maxNum)
+							arr.push(randomNum)
+						}
+						return arr
+					}
+					let elCpunt = 30
+					let mainArray = getArr(elCpunt)
+					console.log(mainArray)
+					//// Галя яка заміняє 2 числа
+					function swap(arr, first, next) {
+						let temp = arr[first]
+						arr[first] = arr[next]
+						arr[next] = temp
+					}
+					//=======================================================
+					//Задача 1. Дано масив 30 випадкових цілих чисел. Підрахувати скільки було обмінів під час сортування бульбашкою
+					//=======================================================
+					function getCountOfBubbleSort(arr) {
+						let newArr = [...arr]
+						let counter = 0
+						let condition
+						do {
+							condition = false
+							for (let i = 1; i < newArr.length; i++) {
+								let j = i - 1
+								if (newArr[i] < newArr[j]) {
+									swap(newArr, j, i)
+									counter++
+									condition = true
+								}
+							}
+						} while (condition === true)
+						return counter
+					}
+					let coutOfChangeBubble = getCountOfBubbleSort(mainArray)
+					document.write(`1) кількість обмінів під час сортування бульбашкою = ${coutOfChangeBubble}
+					          <br/>
+					          <br/>`)
+					//=======================================================
+					// Задача 2. Дано масив 30 випадкових цілих чисел. Підрахувати скільки було обмінів під час сортування змішуванням.
+					//=======================================================
+					function getCountOfCoctailSort(arr) {
+						let arrCopy = [...arr]
+						let counter = 0
+						let start = 0
+						let end = arrCopy.length - 1
+						let j
+						let i
+						while (start <= end) {
+							for (let s = start; s < end; s++) {
+								j = s + 1
+								if (arrCopy[s] > arrCopy[j]) {
+									swap(arrCopy, s, j)
+									counter++
+								}
+							}
+
+							end--
+							for (let e = end; e > start; e--) {
+								i = e - 1
+								if (arrCopy[i] > arrCopy[e]) {
+									swap(arrCopy, i, e)
+									counter++
+								}
+							}
+							start++
+						}
+						return counter
+					}
+					let countOfChangeCoctail = getCountOfCoctailSort(mainArray)
+					document.write(` 2) обмінів під час сортування змішуванням було ${countOfChangeCoctail} <br/>
+               <br/>`)
+
+					//=======================================================
+					// Задача 3. Дано масив 30 випадкових цілих чисел. Підрахувати скільки було обмінів під час сортування включеннями.
+					//=======================================================
+					function getCountOfIncInclusion(arr) {
+						let arrCopy = [...arr]
+						let counter = 0
+						for (let i = 1; i < arrCopy.length; i++) {
+							let curEl = arrCopy[i]
+							let prevEl = i - 1
+							while (prevEl >= 0 && arrCopy[prevEl] > curEl) {
+								arrCopy[prevEl + 1] = arrCopy[prevEl]
+								prevEl -= 1
+								counter++
+							}
+							arrCopy[prevEl + 1] = curEl
+						}
+						return counter
+					}
+					let countOfIncInclusion = getCountOfIncInclusion(mainArray)
+					document.write(`3) обмінів під час сортування включеннями було ${countOfIncInclusion} `)
+				</script>
+			</div>
+		</main>
+	</body>
+</html>
